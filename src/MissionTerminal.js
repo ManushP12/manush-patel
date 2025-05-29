@@ -227,7 +227,7 @@ const MissionTerminal = () => {
             
             <div className="space-y-4">
               <a 
-                href="/Manush_2025_Resume.pdf" 
+                href="/manush-patel/Manush_2025_Resume.pdf" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-xl transition-colors shadow-lg hover:shadow-xl transform hover:scale-105"
@@ -241,7 +241,7 @@ const MissionTerminal = () => {
               
               <div className="mt-6">
                 <a 
-                  href="/Manush_2025_Resume.pdf" 
+                  href="/manush-patel/Manush_2025_Resume.pdf" 
                   download="Manush_Patel_Resume.pdf"
                   className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
                 >
