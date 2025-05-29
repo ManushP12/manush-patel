@@ -56,7 +56,7 @@ const MissionTerminal = () => {
         
         setTimeout(() => setCountdownNumber('LIFTOFF'), 5000);
         setTimeout(() => {
-          setCurrentPhase('phase2'); // Changed from 'flight' to 'phase2'
+          setCurrentPhase('phase2');
         }, 6500);
       }
       
@@ -214,21 +214,42 @@ const MissionTerminal = () => {
           <p className="text-lg text-gray-300">Manush Patel - Resume</p>
         </div>
         
-        {/* PDF Viewer */}
-        <div className="bg-white rounded-lg shadow-lg p-4">
-          <iframe
-            src={`${process.env.PUBLIC_URL}/Manush_2025_Resume.pdf`}
-            width="100%"
-            height="800px"
-            title="Manush Patel Resume"
-            className="rounded border-2 border-gray-300"
-          >
-            <p>Your browser does not support PDFs. 
-              <a href="/Manush_2025_Resume.pdf" target="_blank" rel="noopener noreferrer">
-                Click here to download the PDF file.
+        {/* PDF Viewer - New Tab Approach */}
+        <div className="bg-white rounded-lg shadow-lg p-8">
+          <div className="text-center">
+            <div className="mb-6">
+              <div className="text-6xl mb-4">📄</div>
+              <h3 className="text-3xl font-bold text-gray-800 mb-2">Complete Resume Document</h3>
+              <p className="text-gray-600 text-lg mb-6">
+                View the full PDF resume with all details, formatting, and contact information.
+              </p>
+            </div>
+            
+            <div className="space-y-4">
+              <a 
+                href="/Manush_2025_Resume.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-xl transition-colors shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                📖 Open Full Resume (PDF)
               </a>
-            </p>
-          </iframe>
+              
+              <div className="text-sm text-gray-500 mt-4">
+                Opens in a new tab • Professional formatting preserved
+              </div>
+              
+              <div className="mt-6">
+                <a 
+                  href="/Manush_2025_Resume.pdf" 
+                  download="Manush_Patel_Resume.pdf"
+                  className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                >
+                  💾 Download Resume
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
         
         <div className="text-center mt-8">
@@ -238,13 +259,6 @@ const MissionTerminal = () => {
           >
             ← Back to Mission
           </button>
-          <a 
-            href="/Manush_2025_Resume.pdf" 
-            download="Manush_Patel_Resume.pdf"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold inline-block"
-          >
-            📄 Download PDF Resume
-          </a>
         </div>
       </div>
     </div>
@@ -256,18 +270,12 @@ const MissionTerminal = () => {
         <ResumeViewer />
       ) : (
         <>
-          {showResume ? (
-        <ResumeViewer />
-      ) : (
-        <>
           {currentPhase === 'terminal' && <TerminalScreen />}
           {currentPhase === 'phase2' && <Phase2 onPhaseComplete={handlePhase2Complete} />}
           {currentPhase === 'phase3' && <Phase3 onPhaseComplete={handlePhase3Complete} />}
           {currentPhase === 'phase4' && <Phase4 onPhaseComplete={handlePhase4Complete} />}
           {currentPhase === 'phase5' && <Phase5 onShowResume={handlePhase5Complete} />}
           {currentPhase === 'flight' && <FlightScreen />}
-        </>
-      )}
         </>
       )}
     </div>
