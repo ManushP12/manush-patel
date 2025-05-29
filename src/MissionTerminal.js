@@ -217,7 +217,7 @@ const MissionTerminal = () => {
         {/* PDF Viewer */}
         <div className="bg-white rounded-lg shadow-lg p-4">
           <iframe
-            src="/Manush_2025_Resume.pdf"
+            src={`${process.env.PUBLIC_URL}/Manush_2025_Resume.pdf`}
             width="100%"
             height="800px"
             title="Manush Patel Resume"
