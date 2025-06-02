@@ -90,32 +90,11 @@ const Phase5 = ({ onShowResume }) => {
               zIndex: 10
             }}
           >
-            <svg width="200" height="300" viewBox="0 0 200 300">
-              {/* Rocket Body */}
-              <ellipse cx="100" cy="180" rx="50" ry="70" fill="#E5E5E5" stroke="#000" strokeWidth="3"/>
-              
-              {/* Rocket Nose Cone */}
-              <path d="M 60 110 Q 100 60 140 110 L 140 140 L 60 140 Z" fill="#FF0000" stroke="#000" strokeWidth="3"/>
-              
-              {/* Rocket Window */}
-              <circle cx="100" cy="125" r="20" fill="#87CEEB" stroke="#000" strokeWidth="3"/>
-              <circle cx="100" cy="125" r="15" fill="#87CEEB" stroke="#000" strokeWidth="2"/>
-              
-              {/* Rocket Fins */}
-              <path d="M 60 220 Q 30 240 40 260 L 60 250 Z" fill="#FF0000" stroke="#000" strokeWidth="3"/>
-              <path d="M 140 220 Q 170 240 160 260 L 140 250 Z" fill="#FF0000" stroke="#000" strokeWidth="3"/>
-              
-              {/* Rocket Base */}
-              <rect x="60" y="220" width="80" height="30" fill="#D3D3D3" stroke="#000" strokeWidth="3"/>
-              
-              {/* Engine Nozzle */}
-              <rect x="90" y="250" width="20" height="20" fill="#000" stroke="#000" strokeWidth="2"/>
-              
-              {/* Large Exhaust Flame */}
-              <path d="M 75 270 Q 100 320 125 270 Q 100 360 75 270" fill="#FF4500"/>
-              <path d="M 80 270 Q 100 310 120 270 Q 100 340 80 270" fill="#FFD700"/>
-              <path d="M 85 270 Q 100 300 115 270 Q 100 320 85 270" fill="#FF6347"/>
-            </svg>
+            <img 
+              src="/manush-patel/rocket.png" 
+              alt="Spacecraft" 
+              className="w-48 h-auto drop-shadow-2xl"
+            />
           </div>
 
           {/* Exit Status */}

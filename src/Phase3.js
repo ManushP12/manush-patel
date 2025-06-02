@@ -145,125 +145,296 @@ const Phase3 = ({ onPhaseComplete }) => {
           0%, 100% { opacity: 1; box-shadow: 0 0 20px #00ff00; }
           50% { opacity: 0.7; box-shadow: 0 0 40px #00ff00, 0 0 60px #00ff00; }
         }
+        @keyframes signalPulse {
+          0%, 100% { opacity: 0.6; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.05); }
+        }
       `}</style>
       
-      {/* Rocket */}
+      {/* Custom Rocket Image with Flame */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <svg width="300" height="700" viewBox="0 0 300 700">
-          <ellipse cx="150" cy="400" rx="80" ry="120" fill="#E5E5E5" stroke="#000" strokeWidth="4"/>
-          <path d="M 70 280 Q 150 200 230 280 L 230 320 L 70 320 Z" fill="#FF0000" stroke="#000" strokeWidth="4"/>
-          <circle cx="150" cy="300" r="30" fill="#87CEEB" stroke="#000" strokeWidth="4"/>
-          <circle cx="150" cy="300" r="20" fill="#87CEEB" stroke="#000" strokeWidth="2"/>
-          <path d="M 70 470 Q 30 500 50 530 L 70 520 Z" fill="#FF0000" stroke="#000" strokeWidth="4"/>
-          <path d="M 230 470 Q 270 500 250 530 L 230 520 Z" fill="#FF0000" stroke="#000" strokeWidth="4"/>
-          <rect x="70" y="470" width="160" height="50" fill="#D3D3D3" stroke="#000" strokeWidth="4"/>
-          <rect x="140" y="520" width="20" height="30" fill="#000" stroke="#000" strokeWidth="2"/>
-          <path d="M 110 550 Q 150 620 190 550 Q 150 680 110 550" fill="#FF4500"/>
-          <path d="M 120 550 Q 150 600 180 550 Q 150 660 120 550" fill="#FFD700"/>
-          <path d="M 125 550 Q 150 580 175 550 Q 150 640 125 550" fill="#FF6347"/>
-          <path d="M 130 550 Q 150 570 170 550 Q 150 620 130 550" fill="#FFA500"/>
-        </svg>
+        <div className="relative">
+          {/* Animated Flame - Positioned under rocket and flipped */}
+          <div className="absolute left-1/2 transform -translate-x-1/2" 
+               style={{ 
+                 top: '240px',
+                 zIndex: 5
+               }}>
+            <img 
+              src="/flame.gif" 
+              alt="Rocket Flame" 
+              className="w-40 h-auto"
+              style={{ 
+                transform: 'rotate(180deg)',
+                filter: 'brightness(1.3) contrast(1.2)',
+                maxWidth: 'none'
+              }}
+              onError={(e) => {
+                // Try alternative paths if flame doesn't load
+                if (e.target.src.includes('/flame.gif')) {
+                  e.target.src = '/manush-patel/flame.gif';
+                } else {
+                  e.target.style.display = 'none';
+                }
+              }}
+            />
+          </div>
+          
+          <img 
+            src="/manush-patel/rocket.png" 
+            alt="Spacecraft" 
+            className="w-64 h-auto drop-shadow-2xl relative z-10"
+          />
+          {/* Optional glow effect behind the rocket */}
+          <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-3xl scale-150 -z-10"></div>
+        </div>
       </div>
       
-      {/* UFO */}
+      {/* Modern UFO */}
       {showAlienPrompt && (
-        <div className="absolute top-20 right-20 z-10">
-          <svg width="120" height="80" viewBox="0 0 120 80" className="animate-bounce">
-            <ellipse cx="60" cy="45" rx="50" ry="15" fill="#C0C0C0" stroke="#A0A0A0" strokeWidth="2"/>
-            <ellipse cx="60" cy="35" rx="30" ry="20" fill="#E0E0E0" stroke="#C0C0C0" strokeWidth="2"/>
-            <circle cx="35" cy="45" r="4" fill="#00FF00" className="animate-pulse"/>
-            <circle cx="60" cy="50" r="4" fill="#00FF00" className="animate-pulse"/>
-            <circle cx="85" cy="45" r="4" fill="#00FF00" className="animate-pulse"/>
-            <path d="M 40 60 L 80 60 L 70 75 L 50 75 Z" fill="rgba(0,255,0,0.3)" className="animate-pulse"/>
-          </svg>
-        </div>
-      )}
-      
-      {/* Alien Prompt */}
-      {showAlienPrompt && !showHangman && (
-        <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center z-20">
-          <div className="bg-gray-900 rounded-lg p-8 max-w-2xl mx-8 border-2 border-green-500" style={{animation: 'glow 2s infinite'}}>
-            <div className="text-center text-green-400 font-mono">
-              <div className="text-2xl mb-4">👽 ENCRYPTED ALIEN MESSAGE</div>
-              <div className="text-lg mb-4">We have intercepted an alien transmission.</div>
-              <div className="text-lg mb-4">The message is encrypted. You have 10 attempts to decrypt it.</div>
-              <div className="text-yellow-400 text-xl animate-pulse">Press ENTER to start decryption</div>
+        <div className="absolute top-16 right-16 z-10">
+          <div className="relative" style={{animation: 'signalPulse 2s ease-in-out infinite'}}>
+            <div className="w-24 h-24 bg-gradient-to-br from-slate-600 via-slate-500 to-slate-700 rounded-full shadow-2xl border border-slate-400/50 relative overflow-hidden">
+              {/* UFO Details */}
+              <div className="absolute inset-2 bg-gradient-to-br from-slate-500 to-slate-600 rounded-full"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full opacity-80 animate-pulse"></div>
+              
+              {/* Signal waves */}
+              <div className="absolute -inset-4 border border-cyan-400/30 rounded-full animate-ping"></div>
+              <div className="absolute -inset-8 border border-cyan-400/20 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
             </div>
           </div>
         </div>
       )}
       
-      {/* Hangman Game */}
-      {showHangman && !showWorkExperience && (
-        <div className="absolute inset-0 bg-black bg-opacity-90 flex items-center justify-center z-20">
-          <div className="bg-gray-900 rounded-lg p-8 max-w-4xl mx-8 border-2 border-green-500 font-mono text-green-400">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl mb-4">👽 DECRYPTION IN PROGRESS 👽</h2>
-              <div className="text-4xl mb-6 font-bold text-white tracking-widest">
-                {getDisplayWord()}
+      {/* Terminal Style Alien Prompt */}
+      {showAlienPrompt && !showHangman && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
+          <div className="max-w-4xl mx-auto px-8">
+            
+            {/* Modern Terminal Window */}
+            <div className="bg-slate-800/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 overflow-hidden" style={{boxShadow: '0 0 50px rgba(34, 197, 94, 0.3)'}}>
+              
+              {/* Terminal Header */}
+              <div className="bg-slate-700/50 px-6 py-4 border-b border-slate-600/50 flex items-center">
+                <div className="flex items-center space-x-3">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <span className="text-slate-400 text-sm font-medium ml-4">Alien Communication Terminal v3.7</span>
+                </div>
+              </div>
+
+              {/* Terminal Content */}
+              <div className="p-8 font-mono">
+                <div className="space-y-4">
+                  
+                  {/* Terminal Lines */}
+                  <div className="text-cyan-300 text-xl flex items-center">
+                    <span className="text-emerald-400 mr-3">→</span>
+                    <span>👽 ENCRYPTED ALIEN MESSAGE</span>
+                  </div>
+                  
+                  <div className="text-slate-300 text-lg flex items-center">
+                    <span className="text-emerald-400 mr-3">→</span>
+                    <span>We have intercepted an alien transmission.</span>
+                  </div>
+                  
+                  <div className="text-slate-300 text-lg flex items-center">
+                    <span className="text-emerald-400 mr-3">→</span>
+                    <span>The message is encrypted. You have 10 attempts to decrypt it.</span>
+                  </div>
+                  
+                  {/* Action Prompt Box - Same style as terminal */}
+                  <div className="mt-8">
+                    <div className="text-slate-200 text-xl flex items-center mb-4">
+                      <span className="text-emerald-400 mr-3">→</span>
+                      <span>Ready to begin decryption sequence?</span>
+                    </div>
+                    
+                    <div className="bg-slate-700/30 rounded-lg p-4 border border-slate-600/30">
+                      <div className="flex items-center justify-center">
+                        <div className="flex items-center space-x-3 bg-emerald-600/20 px-4 py-3 rounded-lg border border-emerald-500/30">
+                          <kbd className="bg-slate-600 text-white px-3 py-1 rounded text-sm font-bold">ENTER</kbd>
+                          <span className="text-emerald-300 font-medium">Initialize Decryption</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Modern Hangman Game */}
+      {showHangman && !showWorkExperience && (
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4">
+          <div className="max-w-5xl mx-auto px-8">
             
-            <div className="flex justify-between items-start">
-              <div className="flex-1">
-                <div className="mb-4">
-                  <div className="text-lg">Attempts Remaining: <span className="text-red-400 font-bold text-2xl">{10 - wrongGuesses}</span></div>
+            {/* Modern Terminal Window */}
+            <div className="bg-slate-800/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 overflow-hidden" style={{boxShadow: '0 0 50px rgba(34, 197, 94, 0.3)'}}>
+              
+              {/* Terminal Header */}
+              <div className="bg-slate-700/50 px-6 py-4 border-b border-slate-600/50 flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <span className="text-slate-400 text-sm font-medium ml-4">Quantum Decryption Engine v4.2</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                  <span className="text-cyan-300 text-xs font-medium">DECRYPTING</span>
+                </div>
+              </div>
+
+              {/* Terminal Content */}
+              <div className="p-8 font-mono">
+                
+                {/* Header */}
+                <div className="text-center mb-8">
+                  <h2 className="text-2xl font-bold text-cyan-300 mb-2">👽 DECRYPTION IN PROGRESS 👽</h2>
+                  <div className="text-slate-400 text-sm">Quantum cipher analysis active</div>
                 </div>
                 
-                <div className="mb-4">
-                  <div className="text-sm">Guessed Letters:</div>
-                  <div className="text-lg">{guessedLetters.join(', ')}</div>
+                {/* Word Display */}
+                <div className="text-center mb-8">
+                  <div className="text-5xl font-bold text-white tracking-wider mb-4 font-mono">
+                    {getDisplayWord()}
+                  </div>
+                  <div className="text-slate-400 text-sm">Encrypted Message Fragment</div>
                 </div>
                 
-                {showHint && (
-                  <div className="bg-yellow-900 border border-yellow-500 p-3 rounded mb-4">
-                    <div className="text-yellow-300 font-bold">💡 HINT:</div>
-                    <div className="text-yellow-200">Think of what you want to do with a great candidate...</div>
+                {/* Game Stats Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  
+                  {/* Attempts Counter */}
+                  <div className="bg-slate-700/30 backdrop-blur-sm rounded-xl p-4 border border-slate-600/30">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold mb-2" style={{color: wrongGuesses > 7 ? '#ef4444' : wrongGuesses > 5 ? '#f59e0b' : '#10b981'}}>
+                        {10 - wrongGuesses}
+                      </div>
+                      <div className="text-slate-400 text-sm font-medium">Attempts Left</div>
+                      {/* Visual progress bar */}
+                      <div className="mt-3 bg-slate-600 rounded-full h-2 overflow-hidden">
+                        <div 
+                          className="h-full transition-all duration-500"
+                          style={{
+                            width: `${((10 - wrongGuesses) / 10) * 100}%`,
+                            backgroundColor: wrongGuesses > 7 ? '#ef4444' : wrongGuesses > 5 ? '#f59e0b' : '#10b981'
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Signal Strength Visualization */}
+                  <div className="bg-slate-700/30 backdrop-blur-sm rounded-xl p-4 border border-slate-600/30">
+                    <div className="text-center">
+                      <div className="text-slate-300 text-sm font-medium mb-3">Signal Integrity</div>
+                      <div className="flex justify-center space-x-1">
+                        {Array.from({length: 10}, (_, i) => (
+                          <div
+                            key={i}
+                            className="w-2 rounded-full transition-all duration-300"
+                            style={{
+                              height: `${12 + i * 2}px`,
+                              backgroundColor: i < (10 - wrongGuesses) ? '#10b981' : '#374151'
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Decryption Progress */}
+                  <div className="bg-slate-700/30 backdrop-blur-sm rounded-xl p-4 border border-slate-600/30">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-blue-400 mb-2">
+                        {Math.round((guessedLetters.filter(letter => targetWord.includes(letter)).length / targetWord.replace(/\s/g, '').length) * 100)}%
+                      </div>
+                      <div className="text-slate-400 text-sm font-medium">Decrypted</div>
+                      {/* Circular progress */}
+                      <div className="mt-3 flex justify-center">
+                        <div className="relative w-8 h-8">
+                          <svg className="w-8 h-8 transform -rotate-90" viewBox="0 0 32 32">
+                            <circle cx="16" cy="16" r="14" fill="none" stroke="#374151" strokeWidth="4"/>
+                            <circle 
+                              cx="16" cy="16" r="14" fill="none" stroke="#3b82f6" strokeWidth="4"
+                              strokeDasharray={`${((guessedLetters.filter(letter => targetWord.includes(letter)).length / targetWord.replace(/\s/g, '').length) * 88)} 88`}
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Guessed Letters - Hide when showing failure options */}
+                {!showFailureOptions && (
+                  <div className="bg-slate-700/20 backdrop-blur-sm rounded-xl p-4 border border-slate-600/30 mb-6">
+                    <div className="text-slate-300 text-sm font-medium mb-3">Attempted Characters:</div>
+                    <div className="flex flex-wrap gap-2">
+                      {guessedLetters.map((letter, index) => (
+                        <span
+                          key={index}
+                          className={`px-3 py-1 rounded-lg text-sm font-mono font-bold border ${
+                            targetWord.includes(letter)
+                              ? 'bg-green-500/20 border-green-500/50 text-green-300'
+                              : 'bg-red-500/20 border-red-500/50 text-red-300'
+                          }`}
+                        >
+                          {letter}
+                        </span>
+                      ))}
+                      {guessedLetters.length === 0 && (
+                        <span className="text-slate-500 text-sm italic">None yet...</span>
+                      )}
+                    </div>
                   </div>
                 )}
                 
-                {!gameWon && !gameLost && !showFailureOptions && (
-                  <div className="text-yellow-400">Type a letter to guess...</div>
+                {/* Hint System - Hide when showing failure options */}
+                {showHint && !showFailureOptions && (
+                  <div className="bg-amber-900/20 border border-amber-500/30 rounded-xl p-4 mb-6">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <div className="w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                      </div>
+                      <span className="text-amber-300 font-semibold">QUANTUM HINT ACTIVATED</span>
+                    </div>
+                    <div className="text-amber-200">Think of a great candidate you want to hire</div>
+                  </div>
+                )}
+                
+                {showFailureOptions && (
+                  <div className="text-center">
+                    <div className="bg-slate-700/30 backdrop-blur-sm rounded-xl p-6 border border-slate-600/30">
+                      <div className="text-xl text-slate-200 mb-6">Emergency Protocol Options:</div>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-center space-x-3 bg-blue-600/20 px-4 py-3 rounded-lg border border-blue-500/30">
+                          <kbd className="bg-slate-600 text-white px-3 py-1 rounded text-sm font-bold">1</kbd>
+                          <span className="text-blue-300 font-medium">Attempt Emergency Re-decrypt</span>
+                        </div>
+                        <div className="flex items-center justify-center space-x-3 bg-emerald-600/20 px-4 py-3 rounded-lg border border-emerald-500/30">
+                          <kbd className="bg-slate-600 text-white px-3 py-1 rounded text-sm font-bold">2</kbd>
+                          <span className="text-emerald-300 font-medium">Access Backup Database</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
-              
-              <div className="ml-8 text-right">
-                <div className="text-6xl">
-                  {wrongGuesses >= 1 && '😵'}
-                  {wrongGuesses >= 2 && '👤'}
-                  {wrongGuesses >= 3 && '🫱'}
-                  {wrongGuesses >= 4 && '🫲'}
-                  {wrongGuesses >= 5 && '🦵'}
-                  {wrongGuesses >= 6 && '🦵'}
-                </div>
-                <div className="text-lg mt-2">Wrong: {wrongGuesses}/10</div>
-              </div>
             </div>
-            
-            {gameWon && (
-              <div className="text-center mt-6">
-                <div className="text-2xl text-green-300 mb-2">🎉 DECRYPTION SUCCESSFUL! 🎉</div>
-                <div className="text-xl text-yellow-300">Message decoded: "{targetWord}"</div>
-                <div className="text-lg mt-2">Accessing work experience database...</div>
-              </div>
-            )}
-            
-            {gameLost && !showFailureOptions && (
-              <div className="text-center mt-6">
-                <div className="text-2xl text-red-400 mb-2">❌ DECRYPTION FAILED</div>
-                <div className="text-lg">The message was: "{targetWord}"</div>
-              </div>
-            )}
-            
-            {showFailureOptions && (
-              <div className="text-center mt-6">
-                <div className="text-xl mb-4">What would you like to do?</div>
-                <div className="text-lg">
-                  <div className="mb-2">Press <span className="text-yellow-400 font-bold">1</span> to Try Again</div>
-                  <div>Press <span className="text-yellow-400 font-bold">2</span> to View Work Experience</div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       )}
@@ -278,69 +449,108 @@ const Phase3 = ({ onPhaseComplete }) => {
       
       {/* Work Experience Overlay */}
       {showWorkExperience && (
-        <div className="absolute inset-0 bg-black bg-opacity-90 flex items-center justify-center z-20">
-          <div className="bg-white rounded-lg p-8 max-w-6xl w-full mx-8 max-h-[90vh] overflow-y-auto">
-            <div className="text-center mb-8">
-              <h1 className="text-4xl font-bold text-gray-800 mb-2">💼 Professional Mission Logs</h1>
-              <p className="text-gray-600">
-                {gameWon ? 'Decryption Successful: Work Experience Unlocked' : 'Access Granted: Work Experience Database'}
-              </p>
-            </div>
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 p-4">
+          <div className="bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-indigo-900/95 backdrop-blur-xl rounded-3xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden border border-slate-700/50">
             
-            <div className="space-y-8">
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border-l-4 border-blue-500 shadow-sm">
-                <div className="text-center mb-4">
-                  <h3 className="text-2xl font-bold text-gray-800">IT Product Manager Intern</h3>
-                  <p className="text-blue-600 font-semibold text-lg">First National Financial</p>
-                  <p className="text-gray-600">Toronto, Canada</p>
-                  <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">May 2024 – Aug. 2024</span>
-                </div>
-                <div className="space-y-3 text-gray-700">
-                  <p>• Collaborated closely with engineering, and design teams to deliver product updates on time for 350k users.</p>
-                  <p>• Developed and implemented comprehensive test plans for four new software features, ensuring adherence to initial requirements and detection of critical defects.</p>
-                  <p>• Worked with UX/UI teams to redesign the user interface, reducing user friction and decreasing support requests by 60%.</p>
-                  <p>• Validated the feature hypothesis using usability testing by delivering requirements to design, and the core functionalities to engineering, which 80% of the users felt it was valuable in their scenario, taking the project on the road to production.</p>
-                </div>
-              </div>
+            {/* Animated background elements */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute top-20 left-20 w-64 h-64 bg-green-600/10 rounded-full blur-3xl animate-pulse"></div>
+              <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+            </div>
 
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-lg border-l-4 border-green-500 shadow-sm">
-                <div className="text-center mb-4">
-                  <h3 className="text-2xl font-bold text-gray-800">Chief Growth Officer/Co-Founder</h3>
-                  <p className="text-green-600 font-semibold text-lg">Homiis Inc.</p>
-                  <p className="text-gray-600">Toronto, Canada</p>
-                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full font-medium">Mar. 2023 – Feb. 2024</span>
-                </div>
-                <div className="space-y-3 text-gray-700">
-                  <p>• Founded Homiis to connect young adults with each other to help find a roommate while providing properties for rent.</p>
-                  <p>• Shaped company's long-term strategic plan to enter new markets, boosting revenue by 50%; increase in sign-ups from 50 to 700; analyzed competitive landscape along with drafting marketing and budget plans for short and long-term.</p>
-                  <p>• Automated sales processes using Salesforce, reducing manual data entry and increasing efficiency by 50%, leading to faster deal closures and improved sales pipeline management.</p>
-                  <p>• Raised over $20,000 in funding and was backed and supported by Front Row Ventures.</p>
-                </div>
+            {/* Header Section */}
+            <div className="relative bg-gradient-to-r from-green-900/90 via-blue-900/90 to-slate-900/90 p-8 border-b border-slate-700/50">
+              <div className="absolute top-4 right-4">
+                <button
+                  onClick={closeWorkExperience}
+                  className="w-10 h-10 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 flex items-center justify-center hover:bg-slate-700/80 transition-all duration-200 group"
+                >
+                  <svg className="w-5 h-5 text-slate-400 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
               </div>
-
-              <div className="bg-gradient-to-r from-purple-50 to-violet-50 p-6 rounded-lg border-l-4 border-purple-500 shadow-sm">
-                <div className="text-center mb-4">
-                  <h3 className="text-2xl font-bold text-gray-800">Product Coordinator</h3>
-                  <p className="text-purple-600 font-semibold text-lg">Propel Campus</p>
-                  <p className="text-gray-600">Toronto, Canada</p>
-                  <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full font-medium">Jan. 2022 – Feb. 2023</span>
+              
+              <div className="text-center max-w-3xl mx-auto">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl mb-4 shadow-lg shadow-green-500/25">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6" />
+                  </svg>
                 </div>
-                <div className="space-y-3 text-gray-700">
-                  <p>• Constructed and aided in market expansion, partnered with 18 universities across Canada; Propel is an educational platform to help students get directly in touch with recruiters.</p>
-                  <p>• Increased student userbase by 75% in 60 days by reaching out to club executives and promoting product.</p>
-                  <p>• Built a CRM dashboard on Excel using VBA, Indexing, along with V and XLOOKUP to increase efficiency for acquiring clients by 75% and assisted in development of customer acquisition flow.</p>
-                  <p>• Incorporated 10+ UI features to improve accessibility, functionality and security, design GUIs using Photoshop and Figma.</p>
-                </div>
+                <h1 className="text-3xl font-bold text-white mb-2">Professional Mission Logs</h1>
+                <p className="text-slate-300 text-lg">
+                  {gameWon ? 'Decryption Successful: Work Experience Unlocked' : 'Access Granted: Work Experience Database'}
+                </p>
               </div>
             </div>
+
+            {/* Content Section */}
+            <div className="relative p-8 overflow-y-auto max-h-[60vh]">
+              <div className="space-y-8">
+                <div className="bg-gradient-to-br from-slate-800/50 to-blue-900/30 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/30 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="text-center mb-4">
+                    <h3 className="text-2xl font-bold text-white">IT Product Manager Intern</h3>
+                    <p className="text-blue-300 font-semibold text-lg">First National Financial</p>
+                    <p className="text-slate-400">Toronto, Canada</p>
+                    <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full font-medium border border-blue-500/30">May 2024 – Aug. 2024</span>
+                  </div>
+                  <div className="space-y-3 text-slate-200">
+                    <p>• Collaborated closely with engineering, and design teams to deliver product updates on time for 350k users.</p>
+                    <p>• Developed and implemented comprehensive test plans for four new software features, ensuring adherence to initial requirements and detection of critical defects.</p>
+                    <p>• Worked with UX/UI teams to redesign the user interface, reducing user friction and decreasing support requests by 60%.</p>
+                    <p>• Validated the feature hypothesis using usability testing by delivering requirements to design, and the core functionalities to engineering, which 80% of the users felt it was valuable in their scenario, taking the project on the road to production.</p>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-slate-800/50 to-green-900/30 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/30 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="text-center mb-4">
+                    <h3 className="text-2xl font-bold text-white">Chief Growth Officer/Co-Founder</h3>
+                    <p className="text-green-300 font-semibold text-lg">Homiis Inc.</p>
+                    <p className="text-slate-400">Toronto, Canada</p>
+                    <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full font-medium border border-green-500/30">Mar. 2023 – Feb. 2024</span>
+                  </div>
+                  <div className="space-y-3 text-slate-200">
+                    <p>• Founded Homiis to connect young adults with each other to help find a roommate while providing properties for rent.</p>
+                    <p>• Shaped company's long-term strategic plan to enter new markets, boosting revenue by 50%; increase in sign-ups from 50 to 700; analyzed competitive landscape along with drafting marketing and budget plans for short and long-term.</p>
+                    <p>• Automated sales processes using Salesforce, reducing manual data entry and increasing efficiency by 50%, leading to faster deal closures and improved sales pipeline management.</p>
+                    <p>• Raised over $20,000 in funding and was backed and supported by Front Row Ventures.</p>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-slate-800/50 to-purple-900/30 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/30 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="text-center mb-4">
+                    <h3 className="text-2xl font-bold text-white">Product Coordinator</h3>
+                    <p className="text-purple-300 font-semibold text-lg">Propel Campus</p>
+                    <p className="text-slate-400">Toronto, Canada</p>
+                    <span className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full font-medium border border-purple-500/30">Jan. 2022 – Feb. 2023</span>
+                  </div>
+                  <div className="space-y-3 text-slate-200">
+                    <p>• Constructed and aided in market expansion, partnered with 18 universities across Canada; Propel is an educational platform to help students get directly in touch with recruiters.</p>
+                    <p>• Increased student userbase by 75% in 60 days by reaching out to club executives and promoting product.</p>
+                    <p>• Built a CRM dashboard on Excel using VBA, Indexing, along with V and XLOOKUP to increase efficiency for acquiring clients by 75% and assisted in development of customer acquisition flow.</p>
+                    <p>• Incorporated 10+ UI features to improve accessibility, functionality and security, design GUIs using Photoshop and Figma.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
             
-            <div className="text-center mt-8">
-              <button
-                onClick={closeWorkExperience}
-                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                Continue Mission →
-              </button>
+            {/* Footer */}
+            <div className="relative bg-slate-900/50 backdrop-blur-sm px-8 py-6 border-t border-slate-700/50">
+              <div className="flex items-center justify-between">
+                <div className="text-sm text-slate-400">
+                  Phase 2 Complete • Work Experience Unlocked
+                </div>
+                <button
+                  onClick={closeWorkExperience}
+                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-semibold rounded-2xl hover:from-emerald-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-emerald-500/25 border border-emerald-400/20"
+                >
+                  <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                  <span className="text-lg">Continue Mission</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

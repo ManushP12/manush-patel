@@ -88,42 +88,87 @@ const MissionTerminal = () => {
   };
 
   const TerminalScreen = () => (
-    <div className="min-h-screen bg-black text-green-400 font-mono p-8 flex flex-col justify-center">
-      <div className="max-w-4xl mx-auto">
-        {terminalLines.map((line, index) => (
-          <div key={index} className="mb-2 text-lg">
-            {line}
-          </div>
-        ))}
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center relative overflow-hidden">
+      
+      {/* Subtle animated background elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-emerald-600/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-purple-600/5 rounded-full blur-3xl animate-pulse delay-500"></div>
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto px-8">
         
-        {showLaunchPrompt && !isLaunching && (
-          <div className="mt-4">
-            <div className="text-lg animate-pulse">
-              > Are you ready to commence the journey? [Press ENTER to launch]
-            </div>
-            <div className="mt-2 text-sm text-yellow-400">
-              > Or press SPACE to skip mission and view resume directly
+        {/* Modern Terminal Window */}
+        <div className="bg-slate-800/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 overflow-hidden">
+          
+          {/* Terminal Header */}
+          <div className="bg-slate-700/50 px-6 py-4 border-b border-slate-600/50 flex items-center">
+            <div className="flex items-center space-x-3">
+              <div className="flex space-x-2">
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <span className="text-slate-400 text-sm font-medium ml-4">Mission Terminal v2.1</span>
             </div>
           </div>
-        )}
-        
-        {isLaunching && (
-          <div className="mt-4 text-lg">
-            > Launching...
-            {countdownNumber && (
-              <div className="mt-4 text-center">
-                <div className="text-6xl font-bold text-yellow-400 animate-ping">
-                  {countdownNumber}
+
+          {/* Terminal Content */}
+          <div className="p-8 font-mono">
+            <div className="space-y-3">
+              {terminalLines.map((line, index) => (
+                <div key={index} className="text-slate-300 text-lg flex items-center">
+                  <span className="text-emerald-400 mr-2">→</span>
+                  <span>{line.replace('> ', '')}</span>
+                  {index === terminalLines.length - 1 && (
+                    <span className="ml-2 w-2 h-5 bg-emerald-400 animate-pulse"></span>
+                  )}
                 </div>
-              </div>
-            )}
-            {countdownNumber === 'LIFTOFF' && (
-              <div className="mt-2 text-2xl text-red-400 animate-bounce">
-                🚀 {countdownNumber}!
-              </div>
-            )}
+              ))}
+              
+              {showLaunchPrompt && !isLaunching && (
+                <div className="mt-8 space-y-4">
+                  <div className="text-slate-200 text-xl flex items-center">
+                    <span className="text-emerald-400 mr-2">→</span>
+                    <span>Are you ready to commence the journey?</span>
+                  </div>
+                  
+                  <div className="bg-slate-700/30 rounded-lg p-4 border border-slate-600/30">
+                    <div className="flex items-center justify-center space-x-8">
+                      <div className="flex items-center space-x-3 bg-emerald-600/20 px-4 py-3 rounded-lg border border-emerald-500/30">
+                        <kbd className="bg-slate-600 text-white px-3 py-1 rounded text-sm font-bold">ENTER</kbd>
+                        <span className="text-emerald-300 font-medium">Launch Mission</span>
+                      </div>
+                      <div className="flex items-center space-x-3 bg-blue-600/20 px-4 py-3 rounded-lg border border-blue-500/30">
+                        <kbd className="bg-slate-600 text-white px-3 py-1 rounded text-sm font-bold">SPACE</kbd>
+                        <span className="text-blue-300 font-medium">Skip to Resume</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {isLaunching && (
+                <div className="mt-8 text-center">
+                  <div className="text-slate-200 text-xl flex items-center justify-center mb-8">
+                    <span className="text-emerald-400 mr-2">→</span>
+                    <span>Launching...</span>
+                  </div>
+                  
+                  {countdownNumber && (
+                    <div className="mb-4">
+                      <div className="text-8xl font-bold text-emerald-400 animate-pulse mb-2">
+                        {countdownNumber}
+                      </div>
+
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
@@ -207,58 +252,127 @@ const MissionTerminal = () => {
   );
 
   const ResumeViewer = () => (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-green-400 mb-4">Mission Complete: Resume Accessed</h1>
-          <p className="text-lg text-gray-300">Manush Patel - Resume</p>
-        </div>
-        
-        {/* PDF Viewer - New Tab Approach */}
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <div className="text-center">
-            <div className="mb-6">
-              <div className="text-6xl mb-4">📄</div>
-              <h3 className="text-3xl font-bold text-gray-800 mb-2">Complete Resume Document</h3>
-              <p className="text-gray-600 text-lg mb-6">
-                View the full PDF resume with all details, formatting, and contact information.
-              </p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-green-600/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+      </div>
+
+      <div className="relative z-10 min-h-screen flex items-center justify-center p-6">
+        <div className="max-w-4xl w-full">
+          
+          {/* Header Section */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl mb-6 shadow-2xl shadow-green-500/25">
+              <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
             </div>
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent mb-4">
+              Mission Accomplished
+            </h1>
+            <p className="text-xl text-gray-400 font-light">
+              Resume Database Successfully Accessed
+            </p>
+          </div>
+
+          {/* Main Card */}
+          <div className="bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl p-8 md:p-12">
             
-            <div className="space-y-4">
-              <a 
-                href="https://manushp12.github.io/manush-patel/Manush_2025_Resume.pdf" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-xl transition-colors shadow-lg hover:shadow-xl transform hover:scale-105"
-              >
-                📖 Open Full Resume (PDF)
-              </a>
-              
-              <div className="text-sm text-gray-500 mt-4">
-                Opens in a new tab • Professional formatting preserved
+            {/* Profile Section */}
+            <div className="text-center mb-10">
+              <div className="inline-block relative mb-6">
+                <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-2xl shadow-blue-500/25 ring-4 ring-white/20">
+                  <img 
+                    src="/manush-patel/headshot.jpeg" 
+                    alt="Manush Patel" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
               </div>
-              
-              <div className="mt-6">
+              <h2 className="text-3xl font-bold text-white mb-2">Manush Patel</h2>
+              <p className="text-lg text-blue-300 font-medium">Product Manager & Software Developer</p>
+              <div className="flex items-center justify-center mt-4">
+                <div className="flex items-center space-x-2 text-gray-300">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span className="text-sm">Toronto, Canada</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Stats Section */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              <div className="bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-green-400 mb-1">3+</div>
+                  <div className="text-sm text-gray-400">Years Experience</div>
+                </div>
+              </div>
+              <div className="bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-400 mb-1">350K+</div>
+                  <div className="text-sm text-gray-400">Users Impacted</div>
+                </div>
+              </div>
+              <div className="bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-purple-400 mb-1">$20K+</div>
+                  <div className="text-sm text-gray-400">Funding Raised</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Resume Access Section */}
+            <div className="text-center">
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                 <a 
-                  href="https://manushp12.github.io/manush-patel/Manush_2025_Resume.pdf" 
-                  download="Manush_Patel_Resume.pdf"
-                  className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                  href="/manush-patel/Manush_2025_Resume.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-2xl shadow-2xl shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
                 >
-                  💾 Download Resume
+                  <svg className="w-5 h-5 mr-3 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  Open Resume (PDF)
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                </a>
+                
+                <a 
+                  href="/manush-patel/Manush_2025_Resume.pdf" 
+                  download="Manush_Patel_Resume.pdf"
+                  className="group inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-medium rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
+                >
+                  <svg className="w-5 h-5 mr-3 group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Download PDF
                 </a>
               </div>
             </div>
           </div>
-        </div>
-        
-        <div className="text-center mt-8">
-          <button 
-            onClick={() => setShowResume(false)}
-            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg mr-4 font-semibold"
-          >
-            ← Back to Mission
-          </button>
+
+          {/* Navigation */}
+          <div className="text-center mt-8">
+            <button 
+              onClick={() => setShowResume(false)}
+              className="group inline-flex items-center justify-center px-6 py-3 bg-white/5 backdrop-blur-sm text-gray-300 font-medium rounded-xl border border-white/10 hover:bg-white/10 hover:text-white transition-all duration-300"
+            >
+              <svg className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to Space Mission
+            </button>
+          </div>
         </div>
       </div>
     </div>
