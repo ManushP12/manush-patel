@@ -1,10 +1,85 @@
 import React, { useState, useEffect } from 'react';
-import Phase2 from './Phase2';
-import Phase3 from './Phase3';
-import Phase4 from './Phase4';
-import Phase5 from './Phase5';
 
-const MissionTerminal = () => {
+// Import phase components with error handling
+let Phase2, Phase3, Phase4, Phase5;
+
+try {
+  Phase2 = require('./Phase2').default;
+} catch (error) {
+  console.error('Phase2 not found, using placeholder');
+  Phase2 = ({ onPhaseComplete }) => (
+    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="text-center">
+        <h2 className="text-2xl mb-4">Phase 2 - Education (Placeholder)</h2>
+        <button 
+          onClick={onPhaseComplete}
+          className="bg-blue-500 px-4 py-2 rounded text-white"
+        >
+          Continue to Phase 3
+        </button>
+      </div>
+    </div>
+  );
+}
+
+try {
+  Phase3 = require('./Phase3').default;
+} catch (error) {
+  console.error('Phase3 not found, using placeholder');
+  Phase3 = ({ onPhaseComplete }) => (
+    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="text-center">
+        <h2 className="text-2xl mb-4">Phase 3 - Work Experience (Placeholder)</h2>
+        <button 
+          onClick={onPhaseComplete}
+          className="bg-green-500 px-4 py-2 rounded text-white"
+        >
+          Continue to Phase 4
+        </button>
+      </div>
+    </div>
+  );
+}
+
+try {
+  Phase4 = require('./Phase4').default;
+} catch (error) {
+  console.error('Phase4 not found, using placeholder');
+  Phase4 = ({ onPhaseComplete }) => (
+    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="text-center">
+        <h2 className="text-2xl mb-4">Phase 4 - Community Experience (Placeholder)</h2>
+        <button 
+          onClick={onPhaseComplete}
+          className="bg-purple-500 px-4 py-2 rounded text-white"
+        >
+          Continue to Phase 5
+        </button>
+      </div>
+    </div>
+  );
+}
+
+try {
+  Phase5 = require('./Phase5').default;
+} catch (error) {
+  console.error('Phase5 not found, using placeholder');
+  Phase5 = ({ onShowResume }) => (
+    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="text-center">
+        <h2 className="text-2xl mb-4">Phase 5 - Mission Complete (Placeholder)</h2>
+        <button 
+          onClick={onShowResume}
+          className="bg-yellow-500 px-4 py-2 rounded text-black"
+        >
+          Show Resume
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const MissionTerminal = ({ onShowProfessional }) => {
   const [currentPhase, setCurrentPhase] = useState('terminal');
   const [terminalLines, setTerminalLines] = useState([]);
   const [showLaunchPrompt, setShowLaunchPrompt] = useState(false);
@@ -135,7 +210,7 @@ const MissionTerminal = () => {
                   </div>
                   
                   <div className="bg-slate-700/30 rounded-lg p-4 border border-slate-600/30">
-                    <div className="flex items-center justify-center space-x-8">
+                    <div className="flex items-center justify-center space-x-8 mb-4">
                       <div className="flex items-center space-x-3 bg-emerald-600/20 px-4 py-3 rounded-lg border border-emerald-500/30">
                         <kbd className="bg-slate-600 text-white px-3 py-1 rounded text-sm font-bold">ENTER</kbd>
                         <span className="text-emerald-300 font-medium">Launch Mission</span>
@@ -144,6 +219,19 @@ const MissionTerminal = () => {
                         <kbd className="bg-slate-600 text-white px-3 py-1 rounded text-sm font-bold">SPACE</kbd>
                         <span className="text-blue-300 font-medium">Skip to Resume</span>
                       </div>
+                    </div>
+                    
+                    {/* Professional Website Button */}
+                    <div className="flex justify-center pt-4 border-t border-slate-600/30">
+                      <button
+                        onClick={onShowProfessional}
+                        className="inline-flex items-center justify-center px-6 py-3 bg-white/10 backdrop-blur-sm text-white font-medium rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 group"
+                      >
+                        <svg className="w-5 h-5 mr-3 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9" />
+                        </svg>
+                        View Professional Website
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -161,91 +249,12 @@ const MissionTerminal = () => {
                       <div className="text-8xl font-bold text-emerald-400 animate-pulse mb-2">
                         {countdownNumber}
                       </div>
-
                     </div>
                   )}
                 </div>
               )}
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  const FlightScreen = () => (
-    <div className="min-h-screen bg-gradient-to-b from-black via-purple-900 to-blue-900 relative overflow-hidden">
-      {/* Moving Stars */}
-      <div className="absolute inset-0 animate-pulse">
-        {[...Array(100)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute bg-white rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 3 + 1}px`,
-              height: `${Math.random() * 3 + 1}px`,
-              animation: `moveDown ${Math.random() * 3 + 2}s linear infinite`,
-              animationDelay: `${Math.random() * 2}s`,
-            }}
-          />
-        ))}
-      </div>
-      
-      {/* CSS for moving stars */}
-      <style>{`
-        @keyframes moveDown {
-          0% {
-            transform: translateY(-10px);
-          }
-          100% {
-            transform: translateY(100vh);
-          }
-        }
-      `}</style>
-      
-      {/* Large Rocket SVG */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <svg 
-          width="300" 
-          height="700" 
-          viewBox="0 0 300 700" 
-        >
-          {/* Rocket Body */}
-          <ellipse cx="150" cy="400" rx="80" ry="120" fill="#E5E5E5" stroke="#000" strokeWidth="4"/>
-          
-          {/* Rocket Nose Cone */}
-          <path d="M 70 280 Q 150 200 230 280 L 230 320 L 70 320 Z" fill="#FF0000" stroke="#000" strokeWidth="4"/>
-          
-          {/* Rocket Window */}
-          <circle cx="150" cy="300" r="30" fill="#87CEEB" stroke="#000" strokeWidth="4"/>
-          <circle cx="150" cy="300" r="20" fill="#87CEEB" stroke="#000" strokeWidth="2"/>
-          
-          {/* Rocket Fins */}
-          <path d="M 70 470 Q 30 500 50 530 L 70 520 Z" fill="#FF0000" stroke="#000" strokeWidth="4"/>
-          <path d="M 230 470 Q 270 500 250 530 L 230 520 Z" fill="#FF0000" stroke="#000" strokeWidth="4"/>
-          
-          {/* Rocket Base */}
-          <rect x="70" y="470" width="160" height="50" fill="#D3D3D3" stroke="#000" strokeWidth="4"/>
-          
-          {/* Engine Nozzle */}
-          <rect x="140" y="520" width="20" height="30" fill="#000" stroke="#000" strokeWidth="2"/>
-          
-          {/* Large Static Flame - Made bigger and positioned lower */}
-          <path d="M 110 550 Q 150 620 190 550 Q 150 680 110 550" fill="#FF4500"/>
-          <path d="M 120 550 Q 150 600 180 550 Q 150 660 120 550" fill="#FFD700"/>
-          <path d="M 125 550 Q 150 580 175 550 Q 150 640 125 550" fill="#FF6347"/>
-          <path d="M 130 550 Q 150 570 170 550 Q 150 620 130 550" fill="#FFA500"/>
-        </svg>
-      </div>
-      
-      {/* Instructions */}
-      <div className="absolute top-10 left-10 text-white text-xl font-mono">
-        <div>Mission Status: COMPLETED</div>
-        <div className="mt-2 text-yellow-400">All challenges complete!</div>
-        <div className="mt-4 text-sm text-gray-300">
-          Mission accomplished. Press SPACE to view full resume.
         </div>
       </div>
     </div>
@@ -289,6 +298,11 @@ const MissionTerminal = () => {
                     src="/manush-patel/headshot.jpeg" 
                     alt="Manush Patel" 
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback to initials if image doesn't load
+                      e.target.style.display = 'none';
+                      e.target.parentNode.innerHTML = '<span class="text-3xl font-bold text-white bg-gradient-to-br from-blue-500 to-purple-600 w-full h-full flex items-center justify-center">MP</span>';
+                    }}
                   />
                 </div>
                 <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
@@ -358,6 +372,19 @@ const MissionTerminal = () => {
                   Download PDF
                 </a>
               </div>
+              
+              {/* Professional Website Button - Additional Option */}
+              <div className="pt-4 border-t border-white/10">
+                <button
+                  onClick={onShowProfessional}
+                  className="group inline-flex items-center justify-center px-6 py-3 bg-white/5 backdrop-blur-sm text-white font-medium rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-300"
+                >
+                  <svg className="w-5 h-5 mr-3 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9" />
+                  </svg>
+                  View Professional Website
+                </button>
+              </div>
             </div>
           </div>
 
@@ -389,7 +416,6 @@ const MissionTerminal = () => {
           {currentPhase === 'phase3' && <Phase3 onPhaseComplete={handlePhase3Complete} />}
           {currentPhase === 'phase4' && <Phase4 onPhaseComplete={handlePhase4Complete} />}
           {currentPhase === 'phase5' && <Phase5 onShowResume={handlePhase5Complete} />}
-          {currentPhase === 'flight' && <FlightScreen />}
         </>
       )}
     </div>
