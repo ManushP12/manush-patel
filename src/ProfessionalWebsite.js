@@ -229,7 +229,8 @@ const ProfessionalWebsite = () => {
             
             {/* Subtitle */}
             <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed">
-              Product Manager & Software Developer passionate about building impactful products that solve real-world problems
+                A tech-driven individual that's passionate about building impactful products to <br /> 
+                solve real-world problems
             </p>
             
             {/* CTA Buttons */}
@@ -273,29 +274,27 @@ const ProfessionalWebsite = () => {
       {/* About Section */}
       <section id="about" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">About Me</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              I'm a driven product manager and software developer with a passion for creating technology that makes a difference
-            </p>
-          </div>
-          
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left Column - Text */}
             <div className="space-y-6">
               <h3 className="text-3xl font-bold text-gray-900 mb-6">My Journey</h3>
               <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                 <p>
-                  Currently pursuing a dual degree in Business Commerce and Computer Science at Queen's University, 
-                  I bridge the gap between technical implementation and business strategy.
+                  Currently pursuing a double degree in Commerce and Computer Science at Queen's University, 
+                  I aspire to bridge the gap between technical implementation and business strategy. 
                 </p>
                 <p>
-                  My experience spans from co-founding a startup that raised $20K+ in funding to managing products 
-                  for 350K+ users at First National Financial. I thrive at the intersection of technology and business.
+                  My experience starts from joining a startup incubator at Queen's called QTMA, where I had the opportunity
+                  to be a Product Manager and build several products, one of which was Pantree. This led to me Co-Founding Homiis, 
+                  a roommate-finding platform to help young adults find their perfect roommate. Unfortunately, we had to shut down
+                  operations in February 2024, but the experience taught me invaluable lessons in product development, user research, 
+                  and team leadership. Recently, I have been working as an IT Product Manager Intern at First National Financial, 
+                  where I grew as an individual and learned how to deliver product updates for a large scale corporation.
                 </p>
                 <p>
-                  When I'm not coding or analyzing user data, you'll find me exploring new technologies, 
-                  contributing to open source projects, or mentoring fellow students in product development.
+                  When I'm not working, I like to spend some of my time playing or watching sports, ranging from Hockey, Football,
+                  Basketball, and recently F1. Additionally, I've started to work on my cooking skills, trying to make new recipes 
+                  and learn more about different cuisines. 
                 </p>
               </div>
               <div className="pt-8">
