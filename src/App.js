@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MissionTerminal from './MissionTerminal';
-import ProfessionalWebsite from './ProfessionalWebsite';  // Add this import
+import ProfessionalWebsite from './ProfessionalWebsite';
 import './App.css';
 
 function App() {
