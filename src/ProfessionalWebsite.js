@@ -287,7 +287,9 @@ const ProfessionalWebsite = () => {
                   My experience starts from joining a startup incubator at Queen's called QTMA, where I had the opportunity
                   to be a Product Manager and build several products, one of which was Pantree. This led to me Co-Founding Homiis, 
                   a roommate-finding platform to help young adults find their perfect roommate, and the experience taught me invaluable 
-                  lessons in product development, user research, and team leadership. 
+                  lessons in product development, user research, and team leadership. Recently, I have been working as an IT Product 
+                  Manager Intern at First National Financial, where I grew as an individual and learned how to deliver product updates 
+                  for a large scale corporation.
                 </p>
                 <p>
                   When I'm not working, I like to spend some of my time playing or watching sports, ranging from Hockey, Football,
