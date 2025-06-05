@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ProfessionalWebsite = () => {
+const ProfessionalWebsite = ({ onBack }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -137,12 +137,26 @@ const ProfessionalWebsite = () => {
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            {/* Logo */}
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg">MP</span>
+            {/* Left side - Back to Terminal + Logo */}
+            <div className="flex items-center space-x-6">
+              {/* Back to Terminal Button */}
+              <button
+                onClick={onBack}
+                className="group inline-flex items-center px-4 py-2 bg-white/90 backdrop-blur-md text-gray-700 hover:text-gray-900 font-medium rounded-lg border border-gray-200/50 hover:border-gray-300/50 shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105"
+              >
+                <svg className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span className="text-sm">Back to Terminal</span>
+              </button>
+              
+              {/* Logo */}
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-lg">MP</span>
+                </div>
+                <span className="text-xl font-bold text-gray-800">Manush Patel</span>
               </div>
-              <span className="text-xl font-bold text-gray-800">Manush Patel</span>
             </div>
             
             {/* Desktop Navigation */}

@@ -114,30 +114,44 @@ const MissionTerminal = ({ onShowProfessional }) => {
     }
   }, [currentPhase]);
 
+  // Function to handle launch mission
+  const handleLaunchMission = () => {
+    if (showLaunchPrompt && !isLaunching) {
+      setIsLaunching(true);
+      
+      // Countdown sequence: 3, 2, 1, LIFTOFF
+      setTimeout(() => setCountdownNumber(3), 500);
+      setTimeout(() => setCountdownNumber(null), 1500);
+      
+      setTimeout(() => setCountdownNumber(2), 2000);
+      setTimeout(() => setCountdownNumber(null), 3000);
+      
+      setTimeout(() => setCountdownNumber(1), 3500);
+      setTimeout(() => setCountdownNumber(null), 4500);
+      
+      setTimeout(() => setCountdownNumber('LIFTOFF'), 5000);
+      setTimeout(() => {
+        setCurrentPhase('phase2');
+      }, 6500);
+    }
+  };
+
+  // Function to handle skip to resume
+  const handleSkipToResume = () => {
+    if (currentPhase === 'terminal' || showLaunchPrompt) {
+      setShowResume(true);
+    }
+  };
+
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (event.key === 'Enter' && showLaunchPrompt && !isLaunching) {
-        setIsLaunching(true);
-        
-        // Countdown sequence: 3, 2, 1, LIFTOFF
-        setTimeout(() => setCountdownNumber(3), 500);
-        setTimeout(() => setCountdownNumber(null), 1500);
-        
-        setTimeout(() => setCountdownNumber(2), 2000);
-        setTimeout(() => setCountdownNumber(null), 3000);
-        
-        setTimeout(() => setCountdownNumber(1), 3500);
-        setTimeout(() => setCountdownNumber(null), 4500);
-        
-        setTimeout(() => setCountdownNumber('LIFTOFF'), 5000);
-        setTimeout(() => {
-          setCurrentPhase('phase2');
-        }, 6500);
+        handleLaunchMission();
       }
       
       // Add SPACE key to skip to resume
       if (event.key === ' ' && (currentPhase === 'terminal' || showLaunchPrompt)) {
-        setShowResume(true);
+        handleSkipToResume();
       }
     };
 
@@ -211,14 +225,20 @@ const MissionTerminal = ({ onShowProfessional }) => {
                   
                   <div className="bg-slate-700/30 rounded-lg p-4 border border-slate-600/30">
                     <div className="flex items-center justify-center space-x-8 mb-4">
-                      <div className="flex items-center space-x-3 bg-emerald-600/20 px-4 py-3 rounded-lg border border-emerald-500/30">
-                        <kbd className="bg-slate-600 text-white px-3 py-1 rounded text-sm font-bold">ENTER</kbd>
+                      <button
+                        onClick={handleLaunchMission}
+                        className="flex items-center space-x-3 bg-emerald-600/20 px-4 py-3 rounded-lg border border-emerald-500/30 hover:bg-emerald-600/30 transition-all duration-200 cursor-pointer group"
+                      >
+                        <kbd className="bg-slate-600 text-white px-3 py-1 rounded text-sm font-bold group-hover:bg-slate-500 transition-colors">ENTER</kbd>
                         <span className="text-emerald-300 font-medium">Launch Mission</span>
-                      </div>
-                      <div className="flex items-center space-x-3 bg-blue-600/20 px-4 py-3 rounded-lg border border-blue-500/30">
-                        <kbd className="bg-slate-600 text-white px-3 py-1 rounded text-sm font-bold">SPACE</kbd>
+                      </button>
+                      <button
+                        onClick={handleSkipToResume}
+                        className="flex items-center space-x-3 bg-blue-600/20 px-4 py-3 rounded-lg border border-blue-500/30 hover:bg-blue-600/30 transition-all duration-200 cursor-pointer group"
+                      >
+                        <kbd className="bg-slate-600 text-white px-3 py-1 rounded text-sm font-bold group-hover:bg-slate-500 transition-colors">SPACE</kbd>
                         <span className="text-blue-300 font-medium">Skip to Resume</span>
-                      </div>
+                      </button>
                     </div>
                     
                     {/* Professional Website Button */}

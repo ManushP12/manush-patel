@@ -488,50 +488,139 @@ const Phase3 = ({ onPhaseComplete }) => {
             {/* Content Section */}
             <div className="relative p-8 overflow-y-auto max-h-[60vh]">
               <div className="space-y-8">
-                <div className="bg-gradient-to-br from-slate-800/50 to-blue-900/30 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/30 shadow-xl hover:shadow-2xl transition-all duration-300">
-                  <div className="text-center mb-4">
-                    <h3 className="text-2xl font-bold text-white">IT Product Manager Intern</h3>
-                    <p className="text-blue-300 font-semibold text-lg">First National Financial</p>
-                    <p className="text-slate-400">Toronto, Canada</p>
-                    <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full font-medium border border-blue-500/30">May 2024 – Aug. 2024</span>
+                
+                {/* IT Product Manager Intern */}
+                <div className="bg-slate-800/50 backdrop-blur-sm rounded-3xl p-8 border border-slate-600/30 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
+                    <div className="mb-4 lg:mb-0">
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">IT Product Manager Intern</h3>
+                      <p className="text-lg font-semibold text-blue-400 mb-1">First National Financial</p>
+                      <p className="text-slate-400">Toronto, Canada</p>
+                    </div>
+                    <div className="bg-blue-500/20 text-blue-300 px-6 py-3 rounded-full text-sm font-medium self-start border border-blue-500/30">
+                      May 2024 – Aug. 2024
+                    </div>
                   </div>
-                  <div className="space-y-3 text-slate-200">
-                    <p>• Collaborated closely with engineering, and design teams to deliver product updates on time for 350k users.</p>
-                    <p>• Developed and implemented comprehensive test plans for four new software features, ensuring adherence to initial requirements and detection of critical defects.</p>
-                    <p>• Worked with UX/UI teams to redesign the user interface, reducing user friction and decreasing support requests by 60%.</p>
-                    <p>• Validated the feature hypothesis using usability testing by delivering requirements to design, and the core functionalities to engineering, which 80% of the users felt it was valuable in their scenario, taking the project on the road to production.</p>
+                  
+                  <div className="grid lg:grid-cols-2 gap-16 items-start">
+                    <div>
+                      <h4 className="font-semibold text-white mb-6 text-lg">Key Achievements</h4>
+                      <div className="space-y-4">
+                        <div className="flex items-center">
+                          <div className="w-3 h-3 bg-blue-400 rounded-full mr-4 flex-shrink-0"></div>
+                          <span className="text-slate-300 leading-relaxed">Delivered product updates for 350K+ users</span>
+                        </div>
+                        <div className="flex items-center">
+                          <div className="w-3 h-3 bg-blue-400 rounded-full mr-4 flex-shrink-0"></div>
+                          <span className="text-slate-300 leading-relaxed">Reduced support requests by 60% through UX improvements</span>
+                        </div>
+                        <div className="flex items-center">
+                          <div className="w-3 h-3 bg-blue-400 rounded-full mr-4 flex-shrink-0"></div>
+                          <span className="text-slate-300 leading-relaxed">Validated features with 80% user satisfaction rate</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white mb-6 text-lg">Technologies Used</h4>
+                      <div className="grid grid-cols-2 gap-4">
+                        {["Jira", "Figma", "PowerBI", "SQL"].map((tech, i) => (
+                          <div key={i} className="bg-slate-700/40 text-slate-200 px-6 py-4 rounded-xl text-center font-medium border border-slate-600/30">
+                            {tech}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-slate-800/50 to-green-900/30 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/30 shadow-xl hover:shadow-2xl transition-all duration-300">
-                  <div className="text-center mb-4">
-                    <h3 className="text-2xl font-bold text-white">Chief Growth Officer/Co-Founder</h3>
-                    <p className="text-green-300 font-semibold text-lg">Homiis Inc.</p>
-                    <p className="text-slate-400">Toronto, Canada</p>
-                    <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full font-medium border border-green-500/30">Mar. 2023 – Feb. 2024</span>
+                {/* Chief Growth Officer */}
+                <div className="bg-slate-800/50 backdrop-blur-sm rounded-3xl p-8 border border-slate-600/30 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
+                    <div className="mb-4 lg:mb-0">
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Chief Growth Officer/Co-Founder</h3>
+                      <p className="text-lg font-semibold text-green-400 mb-1">Homiis Inc.</p>
+                      <p className="text-slate-400">Toronto, Canada</p>
+                    </div>
+                    <div className="bg-green-500/20 text-green-300 px-6 py-3 rounded-full text-sm font-medium self-start border border-green-500/30">
+                      Mar. 2023 – Feb. 2024
+                    </div>
                   </div>
-                  <div className="space-y-3 text-slate-200">
-                    <p>• Founded Homiis to connect young adults with each other to help find a roommate while providing properties for rent.</p>
-                    <p>• Shaped company's long-term strategic plan to enter new markets, boosting revenue by 50%; increase in sign-ups from 50 to 700; analyzed competitive landscape along with drafting marketing and budget plans for short and long-term.</p>
-                    <p>• Automated sales processes using Salesforce, reducing manual data entry and increasing efficiency by 50%, leading to faster deal closures and improved sales pipeline management.</p>
-                    <p>• Raised over $20,000 in funding and was backed and supported by Front Row Ventures.</p>
+                  
+                  <div className="grid lg:grid-cols-2 gap-16 items-start">
+                    <div>
+                      <h4 className="font-semibold text-white mb-6 text-lg">Key Achievements</h4>
+                      <div className="space-y-4">
+                        <div className="flex items-center">
+                          <div className="w-3 h-3 bg-green-400 rounded-full mr-4 flex-shrink-0"></div>
+                          <span className="text-slate-300 leading-relaxed">Raised $20K+ in funding from Front Row Ventures</span>
+                        </div>
+                        <div className="flex items-center">
+                          <div className="w-3 h-3 bg-green-400 rounded-full mr-4 flex-shrink-0"></div>
+                          <span className="text-slate-300 leading-relaxed">Grew user base from 50 to 700+ users</span>
+                        </div>
+                        <div className="flex items-center">
+                          <div className="w-3 h-3 bg-green-400 rounded-full mr-4 flex-shrink-0"></div>
+                          <span className="text-slate-300 leading-relaxed">Increased sales efficiency by 50% with Salesforce automation</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white mb-6 text-lg">Technologies Used</h4>
+                      <div className="grid grid-cols-2 gap-4">
+                        {["Salesforce", "React", "Node.js", "PostgreSQL"].map((tech, i) => (
+                          <div key={i} className="bg-slate-700/40 text-slate-200 px-6 py-4 rounded-xl text-center font-medium border border-slate-600/30">
+                            {tech}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-slate-800/50 to-purple-900/30 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/30 shadow-xl hover:shadow-2xl transition-all duration-300">
-                  <div className="text-center mb-4">
-                    <h3 className="text-2xl font-bold text-white">Product Coordinator</h3>
-                    <p className="text-purple-300 font-semibold text-lg">Propel Campus</p>
-                    <p className="text-slate-400">Toronto, Canada</p>
-                    <span className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full font-medium border border-purple-500/30">Jan. 2022 – Feb. 2023</span>
+                {/* Product Coordinator */}
+                <div className="bg-slate-800/50 backdrop-blur-sm rounded-3xl p-8 border border-slate-600/30 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
+                    <div className="mb-4 lg:mb-0">
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Product Coordinator</h3>
+                      <p className="text-lg font-semibold text-purple-400 mb-1">Propel Campus</p>
+                      <p className="text-slate-400">Toronto, Canada</p>
+                    </div>
+                    <div className="bg-purple-500/20 text-purple-300 px-6 py-3 rounded-full text-sm font-medium self-start border border-purple-500/30">
+                      Jan. 2022 – Feb. 2023
+                    </div>
                   </div>
-                  <div className="space-y-3 text-slate-200">
-                    <p>• Constructed and aided in market expansion, partnered with 18 universities across Canada; Propel is an educational platform to help students get directly in touch with recruiters.</p>
-                    <p>• Increased student userbase by 75% in 60 days by reaching out to club executives and promoting product.</p>
-                    <p>• Built a CRM dashboard on Excel using VBA, Indexing, along with V and XLOOKUP to increase efficiency for acquiring clients by 75% and assisted in development of customer acquisition flow.</p>
-                    <p>• Incorporated 10+ UI features to improve accessibility, functionality and security, design GUIs using Photoshop and Figma.</p>
+                  
+                  <div className="grid lg:grid-cols-2 gap-16 items-start">
+                    <div>
+                      <h4 className="font-semibold text-white mb-6 text-lg">Key Achievements</h4>
+                      <div className="space-y-4">
+                        <div className="flex items-center">
+                          <div className="w-3 h-3 bg-purple-400 rounded-full mr-4 flex-shrink-0"></div>
+                          <span className="text-slate-300 leading-relaxed">Partnered with 18 universities across Canada</span>
+                        </div>
+                        <div className="flex items-center">
+                          <div className="w-3 h-3 bg-purple-400 rounded-full mr-4 flex-shrink-0"></div>
+                          <span className="text-slate-300 leading-relaxed">Increased student userbase by 75% in 60 days</span>
+                        </div>
+                        <div className="flex items-center">
+                          <div className="w-3 h-3 bg-purple-400 rounded-full mr-4 flex-shrink-0"></div>
+                          <span className="text-slate-300 leading-relaxed">Built CRM dashboard increasing acquisition efficiency by 75%</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white mb-6 text-lg">Technologies Used</h4>
+                      <div className="grid grid-cols-2 gap-4">
+                        {["Excel", "VBA", "Photoshop", "Figma"].map((tech, i) => (
+                          <div key={i} className="bg-slate-700/40 text-slate-200 px-6 py-4 rounded-xl text-center font-medium border border-slate-600/30">
+                            {tech}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
+                
               </div>
             </div>
             
@@ -539,7 +628,7 @@ const Phase3 = ({ onPhaseComplete }) => {
             <div className="relative bg-slate-900/50 backdrop-blur-sm px-8 py-6 border-t border-slate-700/50">
               <div className="flex items-center justify-between">
                 <div className="text-sm text-slate-400">
-                  Phase 2 Complete • Work Experience Unlocked
+                  Phase 3 Complete • Work Experience Unlocked
                 </div>
                 <button
                   onClick={closeWorkExperience}
