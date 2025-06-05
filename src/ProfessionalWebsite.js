@@ -205,7 +205,7 @@ const ProfessionalWebsite = () => {
             <div className="mb-8">
 
 
-              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-2xl shadow-blue-500/25 transform hover:scale-105 transition-transform duration-300 ring-4 ring-white/20">
+              <div className="w-56 h-56 mx-auto rounded-full overflow-hidden shadow-2xl shadow-blue-500/25 transform hover:scale-105 transition-transform duration-300 ring-4 ring-white/20">
                 <img 
                     src="/manush-patel/headshot.jpeg" 
                     alt="Manush Patel" 
@@ -286,10 +286,10 @@ const ProfessionalWebsite = () => {
                 <p>
                   My experience starts from joining a startup incubator at Queen's called QTMA, where I had the opportunity
                   to be a Product Manager and build several products, one of which was Pantree. This led to me Co-Founding Homiis, 
-                  a roommate-finding platform to help young adults find their perfect roommate. Unfortunately, we had to shut down
-                  operations in February 2024, but the experience taught me invaluable lessons in product development, user research, 
-                  and team leadership. Recently, I have been working as an IT Product Manager Intern at First National Financial, 
-                  where I grew as an individual and learned how to deliver product updates for a large scale corporation.
+                  a roommate-finding platform to help young adults find their perfect roommate, and the experience taught me invaluable 
+                  lessons in product development, user research, and team leadership. Recently, I have been working as an IT Product Manager 
+                  Intern at First National Financial, where I grew as an individual and learned how to deliver product updates for a large 
+                  scale corporation.
                 </p>
                 <p>
                   When I'm not working, I like to spend some of my time playing or watching sports, ranging from Hockey, Football,
