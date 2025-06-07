@@ -205,7 +205,7 @@ const ProfessionalWebsite = ({ onBack }) => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-20 min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+      <section id="home" className="pt-20 pb-24 min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
@@ -217,8 +217,6 @@ const ProfessionalWebsite = ({ onBack }) => {
           <div className="text-center">
             {/* Profile Image */}
             <div className="mb-8">
-
-
               <div className="w-56 h-56 mx-auto rounded-full overflow-hidden shadow-2xl shadow-blue-500/25 transform hover:scale-105 transition-transform duration-300 ring-4 ring-white/20">
                 <img 
                     src="/manush-patel/headshot.jpeg" 
@@ -248,7 +246,7 @@ const ProfessionalWebsite = ({ onBack }) => {
             </p>
             
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-24">
               <button
                 onClick={() => scrollToSection('contact')}
                 className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
@@ -495,8 +493,6 @@ const ProfessionalWebsite = ({ onBack }) => {
               <p className="text-blue-100">Toronto, Canada</p>
             </div>
           </div>
-          
-
           
           <div className="max-w-md mx-auto">
             <a 
