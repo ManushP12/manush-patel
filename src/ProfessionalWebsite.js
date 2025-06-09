@@ -218,7 +218,7 @@ const ProfessionalWebsite = ({ onBack }) => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-20 pb-48 min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+      <section id="home" className="pt-20 pb-28 min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
