@@ -84,7 +84,7 @@ const ProfessionalWebsite = ({ onBack }) => {
         "Conducted research with 20+ student organizations",
         "Optimized business processes using data-driven insights"
       ],
-      technologies: ["PowerBI", "Excel", "Python", "Tableau"]
+      technologies: ["PowerBI", "Excel", "Python", "RStudio"]
     }
   ];
 
@@ -93,7 +93,7 @@ const ProfessionalWebsite = ({ onBack }) => {
       title: "Homiis Platform",
       description: "A roommate-finding platform that connects young adults and provides rental properties, growing from 50 to 700+ users.",
       technologies: ["React", "Node.js", "PostgreSQL"],
-      highlight: "Funded by Front Row Ventures",
+      highlight: "Backed by Front Row Ventures",
       color: "blue",
       icon: "🏠"
     },
