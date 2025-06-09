@@ -35,6 +35,19 @@ const ProfessionalWebsite = ({ onBack }) => {
 
   const experiences = [
     {
+      title: "Product Intern",
+      company: "Pine Financial",
+      location: "Toronto, Canada",
+      period: "May 2025 – Aug. 2025",
+      color: "indigo",
+      achievements: [
+        "Analyzed deals totalling $25M in mortgages",
+        "Constructed Python scripts saving 2 man hours daily",
+        "Performed feature QA and regression testing"
+      ],
+      technologies: ["Python", "Redis", "Metabase", "SQL"]
+    },
+    {
       title: "IT Product Manager Intern",
       company: "First National Financial",
       location: "Toronto, Canada",
@@ -205,7 +218,7 @@ const ProfessionalWebsite = ({ onBack }) => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-20 pb-24 min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+      <section id="home" className="pt-20 pb-48 min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
@@ -299,9 +312,9 @@ const ProfessionalWebsite = ({ onBack }) => {
                   My experience starts from joining a startup incubator at Queen's called QTMA, where I had the opportunity
                   to be a Product Manager and build several products, one of which was Pantree. This led to me Co-Founding Homiis, 
                   a roommate-finding platform to help young adults find their perfect roommate, and the experience taught me invaluable 
-                  lessons in product development, user research, and team leadership. Recently, I have been working as an IT Product 
-                  Manager Intern at First National Financial, where I grew as an individual and learned how to deliver product updates 
-                  for a large scale corporation.
+                  lessons in product development, user research, and team leadership. Recently, I have been working as Product 
+                  Intern at Pine Financial, where I have been working on all sides of the operations whether that may be on the business 
+                  or the engineering side.
                 </p>
                 <p>
                   When I'm not working, I like to spend some of my time playing or watching sports, ranging from Hockey, Football,
