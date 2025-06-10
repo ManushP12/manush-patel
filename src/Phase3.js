@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Phase3 = ({ onPhaseComplete }) => {
   const [showAlienPrompt, setShowAlienPrompt] = useState(false);
@@ -14,6 +14,10 @@ const Phase3 = ({ onPhaseComplete }) => {
   const [gameLost, setGameLost] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [showFailureOptions, setShowFailureOptions] = useState(false);
+
+  // Mobile keyboard support
+  const hiddenInputRef = useRef(null);
+  const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
   // Start alien sequence after 3 seconds
   useEffect(() => {
@@ -118,6 +122,22 @@ const Phase3 = ({ onPhaseComplete }) => {
     setShowWorkExperience(false);
     setFlightPaused(false);
     onPhaseComplete();
+  };
+
+  // Handle mobile keyboard input
+  const handleMobileInput = (event) => {
+    const letter = event.target.value.slice(-1).toUpperCase();
+    if (letter >= 'A' && letter <= 'Z' && !guessedLetters.includes(letter)) {
+      makeGuess(letter);
+    }
+    // Clear the input to allow repeated letters
+    event.target.value = '';
+  };
+
+  const focusHiddenInput = () => {
+    if (isMobile && hiddenInputRef.current) {
+      hiddenInputRef.current.focus();
+    }
   };
 
   return (
@@ -311,12 +331,36 @@ const Phase3 = ({ onPhaseComplete }) => {
                   <div className="text-slate-400 text-sm">Quantum cipher analysis active</div>
                 </div>
                 
-                {/* Word Display */}
+                {/* Word Display with Mobile Support */}
                 <div className="text-center mb-8">
-                  <div className="text-5xl font-bold text-white tracking-wider mb-4 font-mono">
-                    {getDisplayWord()}
+                  <div className="relative inline-block">
+                    <div 
+                      className="text-5xl font-bold text-white tracking-wider mb-4 font-mono cursor-pointer"
+                      onClick={focusHiddenInput}
+                    >
+                      {getDisplayWord()}
+                    </div>
+                    {/* Hidden input for mobile keyboard */}
+                    <input
+                      ref={hiddenInputRef}
+                      type="text"
+                      className="absolute opacity-0 pointer-events-none w-full h-full top-0 left-0"
+                      onInput={handleMobileInput}
+                      autoCapitalize="characters"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      spellCheck="false"
+                      style={{ fontSize: '16px' }} // Prevents zoom on iOS
+                    />
                   </div>
-                  <div className="text-slate-400 text-sm">Encrypted Message Fragment</div>
+                  <div className="text-slate-400 text-sm">
+                    Encrypted Message Fragment
+                    {isMobile && (
+                      <div className="text-xs text-slate-500 mt-1">
+                        Tap the letters above to open keyboard
+                      </div>
+                    )}
+                  </div>
                 </div>
                 
                 {/* Game Stats Grid */}
