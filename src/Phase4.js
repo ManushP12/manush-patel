@@ -5,6 +5,10 @@ const Phase4 = ({ onPhaseComplete }) => {
   const [showWirePuzzle, setShowWirePuzzle] = useState(false);
   const [showCommunityExperience, setShowCommunityExperience] = useState(false);
   const [flightPaused, setFlightPaused] = useState(false);
+  const [revealedPositions, setRevealedPositions] = useState({
+    openai: false,
+    queens: false
+  });
   
   // Wire puzzle state
   const wireColors = ['red', 'green', 'blue', 'yellow', 'orange'];
@@ -437,31 +441,133 @@ const Phase4 = ({ onPhaseComplete }) => {
                 
                 {/* Educational Growth Coordinator */}
                 <div className="bg-gradient-to-br from-slate-800/50 to-green-900/30 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/30 shadow-xl hover:shadow-2xl transition-all duration-300">
-                  <div className="text-center mb-4">
+                  <div className="text-center mb-6">
                     <h3 className="text-2xl font-bold text-white">Educational Growth Coordinator</h3>
-                    <p className="text-green-300 font-semibold text-lg">OpenAI</p>
-                    <p className="text-slate-400">Toronto, Canada</p>
-                    <span className="bg-green-500/20 text-green-300 px-3 py-1 rounded-full font-medium border border-green-500/30">Jan. 2025 – Present</span>
+                    <p className="text-green-300 font-semibold text-lg">OpenAI • Jan. 2025 – Mar. 2025</p>
                   </div>
-                  <div className="space-y-3 text-slate-200">
-                    <p>• Consulted OpenAI's EDU strategy team on launching a ChatGPT Plus discount for university students, analyzing student engagement trends and recommending high-impact promotional strategies to reach 100,000+ students.</p>
-                    <p>• Developed and executed a promotional strategy, conducting user research through surveys and focus groups with 20 student organizations to assess engagement preferences, and leveraging Power BI to analyze findings and present insights.</p>
-                    <p>• Supported corporate strategy initiatives by tracking OKRs and conducting ad hoc performance analysis, leveraging data-driven insights to optimize key business processes and improve decision-making for senior leadership.</p>
+                  
+                  {/* Blurred Content Area */}
+                  <div className="relative">
+                    <div 
+                      className={`transition-all duration-500 ${
+                        revealedPositions.openai ? 'filter-none' : 'filter blur-md'
+                      }`}
+                    >
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Role Description - Left */}
+                        <div>
+                          <h4 className="text-lg font-semibold text-green-300 mb-3">Role Overview</h4>
+                          <p className="text-slate-200 leading-relaxed">
+                            Collaborated with OpenAI's education strategy team to expand ChatGPT Plus access to university students. 
+                            Focused on user research, promotional strategy development, and corporate performance analysis to drive 
+                            educational technology adoption across academic institutions.
+                          </p>
+                        </div>
+                        
+                        {/* Key Achievements - Right */}
+                        <div>
+                          <h4 className="text-lg font-semibold text-green-300 mb-3">Key Achievements</h4>
+                          <div className="space-y-2 text-slate-200">
+                            <div className="flex items-start space-x-2">
+                              <span className="text-green-400 mt-1">•</span>
+                              <span>Reached 100,000+ students through promotional campaigns</span>
+                            </div>
+                            <div className="flex items-start space-x-2">
+                              <span className="text-green-400 mt-1">•</span>
+                              <span>Conducted research with 20 student organizations</span>
+                            </div>
+                            <div className="flex items-start space-x-2">
+                              <span className="text-green-400 mt-1">•</span>
+                              <span>Optimized corporate strategy through OKR tracking</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Click to Reveal Overlay */}
+                    {!revealedPositions.openai && (
+                      <div 
+                        className="absolute inset-0 flex items-center justify-center bg-slate-900/20 backdrop-blur-sm rounded-xl cursor-pointer hover:bg-slate-900/30 transition-all duration-200"
+                        onClick={() => setRevealedPositions(prev => ({ ...prev, openai: true }))}
+                      >
+                        <div className="text-center">
+                          <div className="inline-flex items-center px-6 py-3 bg-green-500/20 text-green-300 rounded-full font-medium border border-green-500/30 hover:bg-green-500/30 transition-all duration-200">
+                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            Click to Reveal
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
                 {/* Product Manager */}
                 <div className="bg-gradient-to-br from-slate-800/50 to-blue-900/30 backdrop-blur-sm rounded-2xl p-6 border border-slate-600/30 shadow-xl hover:shadow-2xl transition-all duration-300">
-                  <div className="text-center mb-4">
+                  <div className="text-center mb-6">
                     <h3 className="text-2xl font-bold text-white">Product Manager</h3>
-                    <p className="text-blue-300 font-semibold text-lg">Queen's Tech & Media Association</p>
-                    <p className="text-slate-400">Kingston, Canada</p>
-                    <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full font-medium border border-blue-500/30">Sep. 2021 – Apr. 2024</span>
+                    <p className="text-blue-300 font-semibold text-lg">Queen's Tech & Media Association • Sep. 2021 – Apr. 2024</p>
                   </div>
-                  <div className="space-y-3 text-slate-200">
-                    <p>• Spearheaded a team of 4 developers and 4 business analysts to develop Pantree, a product that sends automated notifications to remind the users of their groceries in their pantry and the meals that can be cooked with those groceries.</p>
-                    <p>• Utilized Node.js and React.js to work on front-end development of product; had 100 users on the platform within a month.</p>
-                    <p>• Won First Place in the demo day competition presenting to McKinsey and Company.</p>
+                  
+                  {/* Blurred Content Area */}
+                  <div className="relative">
+                    <div 
+                      className={`transition-all duration-500 ${
+                        revealedPositions.queens ? 'filter-none' : 'filter blur-md'
+                      }`}
+                    >
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Role Description - Left */}
+                        <div>
+                          <h4 className="text-lg font-semibold text-blue-300 mb-3">Role Overview</h4>
+                          <p className="text-slate-200 leading-relaxed">
+                            Led cross-functional product development for Pantree, an innovative grocery management application. 
+                            Managed a diverse team of developers and business analysts while contributing to front-end development 
+                            and strategic product positioning.
+                          </p>
+                        </div>
+                        
+                        {/* Key Achievements - Right */}
+                        <div>
+                          <h4 className="text-lg font-semibold text-blue-300 mb-3">Key Achievements</h4>
+                          <div className="space-y-2 text-slate-200">
+                            <div className="flex items-start space-x-2">
+                              <span className="text-blue-400 mt-1">•</span>
+                              <span>Led team of 8 members (4 developers + 4 business analysts)</span>
+                            </div>
+                            <div className="flex items-start space-x-2">
+                              <span className="text-blue-400 mt-1">•</span>
+                              <span>Achieved 100 users within first month of launch</span>
+                            </div>
+                            <div className="flex items-start space-x-2">
+                              <span className="text-blue-400 mt-1">•</span>
+                              <span>Won First Place presenting to McKinsey & Company</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Click to Reveal Overlay */}
+                    {!revealedPositions.queens && (
+                      <div 
+                        className="absolute inset-0 flex items-center justify-center bg-slate-900/20 backdrop-blur-sm rounded-xl cursor-pointer hover:bg-slate-900/30 transition-all duration-200"
+                        onClick={() => setRevealedPositions(prev => ({ ...prev, queens: true }))}
+                      >
+                        <div className="text-center">
+                          <div className="inline-flex items-center px-6 py-3 bg-blue-500/20 text-blue-300 rounded-full font-medium border border-blue-500/30 hover:bg-blue-500/30 transition-all duration-200">
+                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            Click to Reveal
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
