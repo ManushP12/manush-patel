@@ -88,11 +88,11 @@ const MissionTerminal = ({ onShowProfessional }) => {
   const [showResume, setShowResume] = useState(false);
 
   const bootMessages = [
-    "Initializing systems...",
+    "Welcome to Manush's Website...",
     "Connecting to remote resume server...",
-    "Authenticating user...",
-    "Access granted.",
-    "Launch sequence in standby mode."
+    "Loading projects and experiences...",
+    "All systems operational.",
+    "Website loaded and ready to explore."
   ];
 
   useEffect(() => {
@@ -100,7 +100,10 @@ const MissionTerminal = ({ onShowProfessional }) => {
       let messageIndex = 0;
       const typewriterInterval = setInterval(() => {
         if (messageIndex < bootMessages.length) {
-          setTerminalLines(prev => [...prev, `> ${bootMessages[messageIndex]}`]);
+          const message = bootMessages[messageIndex];
+          if (message && message.trim() !== '') {
+            setTerminalLines(prev => [...prev, message]);
+          }
           messageIndex++;
         } else {
           clearInterval(typewriterInterval);
@@ -209,7 +212,7 @@ const MissionTerminal = ({ onShowProfessional }) => {
               {terminalLines.map((line, index) => (
                 <div key={index} className="text-slate-300 text-lg flex items-center">
                   <span className="text-emerald-400 mr-2">→</span>
-                  <span>{line.replace('> ', '')}</span>
+                  <span>{line}</span>
                   {index === terminalLines.length - 1 && (
                     <span className="ml-2 w-2 h-5 bg-emerald-400 animate-pulse"></span>
                   )}
@@ -220,7 +223,7 @@ const MissionTerminal = ({ onShowProfessional }) => {
                 <div className="mt-8 space-y-4">
                   <div className="text-slate-200 text-xl flex items-center">
                     <span className="text-emerald-400 mr-2">→</span>
-                    <span>Are you ready to commence the journey?</span>
+                    <span>Are you ready to view my website?</span>
                   </div>
                   
                   <div className="bg-slate-700/30 rounded-lg p-4 border border-slate-600/30">
