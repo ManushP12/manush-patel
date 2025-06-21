@@ -7,7 +7,7 @@ const Phase3 = ({ onPhaseComplete }) => {
   const [flightPaused, setFlightPaused] = useState(false);
   
   // Hangman game state
-  const [targetWord] = useState('HIRE MANUSH');
+  const [targetWord] = useState('INNOVATIVE');
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wrongGuesses, setWrongGuesses] = useState(0);
   const [gameWon, setGameWon] = useState(false);
