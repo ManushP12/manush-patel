@@ -464,7 +464,7 @@ const Phase3 = ({ onPhaseComplete }) => {
                       </div>
                       <span className="text-amber-300 font-semibold">QUANTUM HINT ACTIVATED</span>
                     </div>
-                    <div className="text-amber-200">Think of a great candidate you want to hire</div>
+                    <div className="text-amber-200">Trait of a quality individual</div>
                   </div>
                 )}
                 
