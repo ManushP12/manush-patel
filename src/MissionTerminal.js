@@ -81,45 +81,13 @@ try {
 
 const MissionTerminal = ({ onShowProfessional }) => {
   const [currentPhase, setCurrentPhase] = useState('terminal');
-  const [terminalLines, setTerminalLines] = useState([]);
-  const [showLaunchPrompt, setShowLaunchPrompt] = useState(false);
+  const [showResume, setShowResume] = useState(false);
   const [isLaunching, setIsLaunching] = useState(false);
   const [countdownNumber, setCountdownNumber] = useState(null);
-  const [showResume, setShowResume] = useState(false);
-
-  const bootMessages = [
-    "Welcome to Manush's Website...",
-    "Connecting to remote resume server...",
-    "Loading projects and experiences...",
-    "All systems operational.",
-    "Website loaded and ready to explore."
-  ];
-
-  useEffect(() => {
-    if (currentPhase === 'terminal') {
-      let messageIndex = 0;
-      const typewriterInterval = setInterval(() => {
-        if (messageIndex < bootMessages.length) {
-          const message = bootMessages[messageIndex];
-          if (message && message.trim() !== '') {
-            setTerminalLines(prev => [...prev, message]);
-          }
-          messageIndex++;
-        } else {
-          clearInterval(typewriterInterval);
-          setTimeout(() => {
-            setShowLaunchPrompt(true);
-          }, 1000);
-        }
-      }, 800);
-
-      return () => clearInterval(typewriterInterval);
-    }
-  }, [currentPhase]);
 
   // Function to handle launch mission
   const handleLaunchMission = () => {
-    if (showLaunchPrompt && !isLaunching) {
+    if (!isLaunching) {
       setIsLaunching(true);
       
       // Countdown sequence: 3, 2, 1, LIFTOFF
@@ -141,26 +109,26 @@ const MissionTerminal = ({ onShowProfessional }) => {
 
   // Function to handle skip to resume
   const handleSkipToResume = () => {
-    if (currentPhase === 'terminal' || showLaunchPrompt) {
+    if (currentPhase === 'terminal') {
       setShowResume(true);
     }
   };
 
   useEffect(() => {
     const handleKeyPress = (event) => {
-      if (event.key === 'Enter' && showLaunchPrompt && !isLaunching) {
+      if (event.key === 'Enter' && currentPhase === 'terminal' && !isLaunching) {
         handleLaunchMission();
       }
       
       // Add SPACE key to skip to resume
-      if (event.key === ' ' && (currentPhase === 'terminal' || showLaunchPrompt)) {
+      if (event.key === ' ' && currentPhase === 'terminal') {
         handleSkipToResume();
       }
     };
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [showLaunchPrompt, isLaunching, currentPhase]);
+  }, [isLaunching, currentPhase]);
 
   // Handle phase completion
   const handlePhase2Complete = () => {
@@ -209,21 +177,11 @@ const MissionTerminal = ({ onShowProfessional }) => {
           {/* Terminal Content */}
           <div className="p-8 font-mono">
             <div className="space-y-3">
-              {terminalLines.map((line, index) => (
-                <div key={index} className="text-slate-300 text-lg flex items-center">
-                  <span className="text-emerald-400 mr-2">→</span>
-                  <span>{line}</span>
-                  {index === terminalLines.length - 1 && (
-                    <span className="ml-2 w-2 h-5 bg-emerald-400 animate-pulse"></span>
-                  )}
-                </div>
-              ))}
-              
-              {showLaunchPrompt && !isLaunching && (
-                <div className="mt-8 space-y-4">
+              {!isLaunching && (
+                <div className="space-y-8">
                   <div className="text-slate-200 text-xl flex items-center">
                     <span className="text-emerald-400 mr-2">→</span>
-                    <span>Are you ready to view my website?</span>
+                    <span>Welcome to my Website</span>
                   </div>
                   
                   <div className="bg-slate-700/30 rounded-lg p-4 border border-slate-600/30">
